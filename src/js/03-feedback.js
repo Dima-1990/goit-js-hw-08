@@ -1,5 +1,3 @@
-
-import { includes } from 'lodash';
 import throttle from 'lodash.throttle';
 
 const myFormEl = document.querySelector('.feedback-form');
@@ -9,7 +7,7 @@ const btnSubmitEl = myFormEl.lastElementChild;
 
 let enteredValues = {};
 
-defoltValueInput();
+
 
 myFormEl.addEventListener(
   'input',
@@ -35,9 +33,15 @@ function defoltValueInput() {
     if (infoFromLocal !== null) {
       formFirstLabel.lastElementChild.value = infoFromLocal.email;
       formSecondLabel.lastElementChild.value = infoFromLocal.message;
+
+      enteredValues.email = infoFromLocal.email;
+      enteredValues.message = infoFromLocal.message;
+    } else {
+      enteredValues.email = formFirstLabel.lastElementChild.value;
+      enteredValues.message = formSecondLabel.lastElementChild.value;
     }
   } catch (error) {
-    console.log('помилка поля вводу');
+    console.log('помилка поля вводу', error);
   }
 }
 
@@ -48,10 +52,13 @@ btnSubmitEl.addEventListener('click', e => {
     message: formSecondLabel.lastElementChild.value,
   };
 
-  if (formFirstLabel.lastElementChild.value === '' || !formFirstLabel.lastElementChild.value.includes("@")) {
-  alert('Поле Email порожнє або не містить адреси');
-  return;
-}
+  if (
+    formFirstLabel.lastElementChild.value === '' ||
+    !formFirstLabel.lastElementChild.value.includes('@')
+  ) {
+    alert('Поле Email порожнє або не містить @');
+    return;
+  }
 
   if (formSecondLabel.lastElementChild.value === '') {
     alert('Поле Message порожнє');
@@ -64,92 +71,4 @@ btnSubmitEl.addEventListener('click', e => {
   localStorage.clear();
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+defoltValueInput();
