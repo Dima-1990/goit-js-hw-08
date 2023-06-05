@@ -13,7 +13,7 @@ defoltValueInput();
 myFormEl.addEventListener(
   'input',
   throttle(e => {
-    if (e.target.type === formFirstLabel.lastElementChild.name) {
+    if (e.target === formFirstLabel.lastElementChild) {
       enteredValues.email = e.target.value;
     } else {
       enteredValues.message = e.target.value;
