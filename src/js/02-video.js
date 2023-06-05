@@ -14,6 +14,6 @@ const getCurrentTime = function (currentTime) {
   localStorage.setItem('videoplayer-current-time', JSON.stringify(seconds));
 };
 
-player.on('timeupdate', throttle(getCurrentTime, 3000));
+player.on('timeupdate', throttle(getCurrentTime, 1000));
 
 player.setCurrentTime(JSON.parse(localStorage.getItem('videoplayer-current-time')) || 0);
