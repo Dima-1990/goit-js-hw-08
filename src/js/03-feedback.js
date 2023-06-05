@@ -1,4 +1,5 @@
 
+import { includes } from 'lodash';
 import throttle from 'lodash.throttle';
 
 const myFormEl = document.querySelector('.feedback-form');
@@ -47,11 +48,13 @@ btnSubmitEl.addEventListener('click', e => {
     message: formSecondLabel.lastElementChild.value,
   };
 
-  if (
-    formFirstLabel.lastElementChild.value === '' ||
-    formSecondLabel.lastElementChild.value === ''
-  ) {
-    alert('Не всі поля заповнені');
+  if (formFirstLabel.lastElementChild.value === '' || !formFirstLabel.lastElementChild.value.includes("@")) {
+  alert('Поле Email порожнє або не містить адреси');
+  return;
+}
+
+  if (formSecondLabel.lastElementChild.value === '') {
+    alert('Поле Message порожнє');
     return;
   }
 
